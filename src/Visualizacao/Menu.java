@@ -5,6 +5,7 @@ import Conexao.RequisicaoHTTP;
 import Config.ConfiguracaoAPI;
 import Enums.IOF;
 import Modelo.ExchangeRateResponse;
+import Modelo.Log;
 import Parser.DezserializeGson;
 
 import java.util.InputMismatchException;
@@ -64,6 +65,7 @@ public class Menu {
                                             System.out.printf("\nConversao de Real para Dollar: %s", mooedaConversao + "\n");
                                             System.out.println(" ");
                                             System.out.println("--------------------------------------------------");
+                                            gravaLog("Real","Dolar",formaPagamento, quantidade, mooedaConversao);
                                             break;
                                         case 2:
                                             System.out.println("Real => Euro");
@@ -80,6 +82,7 @@ public class Menu {
                                             System.out.printf("\nConversao de Real para Euro: %s", mooedaConversao + "\n");
                                             System.out.println(" ");
                                             System.out.println("--------------------------------------------------");
+                                            gravaLog("Real","Euro",formaPagamento, quantidade, mooedaConversao);
                                             break;
                                         case 3:
                                             System.out.println("Real => Peso Argentino");
@@ -96,6 +99,7 @@ public class Menu {
                                             System.out.printf("\nConversao de Real para Peso Argentino: %s", mooedaConversao + "\n");
                                             System.out.println(" ");
                                             System.out.println("--------------------------------------------------");
+                                            gravaLog("Real","Peso Argentino",formaPagamento, quantidade, mooedaConversao);
                                             break;
                                         case 4:
                                             System.out.println("Dolar => Real");
@@ -112,6 +116,7 @@ public class Menu {
                                             System.out.printf("\nConversao de Dolar para Real: %s", mooedaConversao + "\n");
                                             System.out.println(" ");
                                             System.out.println("--------------------------------------------------");
+                                            gravaLog("Dolar","Real",formaPagamento, quantidade, mooedaConversao);
                                             break;
                                         case 5:
                                             System.out.println("Euro => Real");
@@ -128,6 +133,7 @@ public class Menu {
                                             System.out.printf("\nConversao de Euro para Real: %s", mooedaConversao + "\n");
                                             System.out.println(" ");
                                             System.out.println("--------------------------------------------------");
+                                            gravaLog("Euro","Real",formaPagamento, quantidade, mooedaConversao);
                                             break;
                                         case 6:
                                             System.out.println("Peso Argentino => Real");
@@ -144,6 +150,7 @@ public class Menu {
                                             System.out.printf("\nConversao de Peso Argentino para Real: %s", mooedaConversao + "\n");
                                             System.out.println(" ");
                                             System.out.println("--------------------------------------------------");
+                                            gravaLog("Peso Argentino","Real",formaPagamento, quantidade, mooedaConversao);
                                             break;
                                         case 7:
                                             System.out.println("Dolar => Euro");
@@ -160,6 +167,7 @@ public class Menu {
                                             System.out.printf("\nConversao de Dolar para Euro: %s", mooedaConversao + "\n");
                                             System.out.println(" ");
                                             System.out.println("--------------------------------------------------");
+                                            gravaLog("Dolar","Euro",formaPagamento, quantidade, mooedaConversao);
                                             break;
                                         case 8:
                                             System.out.println("Euro => Dolar");
@@ -176,6 +184,7 @@ public class Menu {
                                             System.out.printf("\nConversao de Euro para Dolar: %s", mooedaConversao + "\n");
                                             System.out.println(" ");
                                             System.out.println("--------------------------------------------------");
+                                            gravaLog("Euro","Dolar",formaPagamento, quantidade, mooedaConversao);
                                             break;
                                         case 9:
                                             break;
@@ -203,6 +212,11 @@ public class Menu {
         while (opcao != 3);
 
 
+    }
+
+    private static void gravaLog(String moedaOrigem, String moedaDestino, double formaPagamento, double quantidade, double mooedaConversao) {
+        String formaPagamentoEscolhida = formaPagamento == 1 ? "Dinheiro" : "Cartao";
+        Log.registrarLog(moedaOrigem,moedaDestino, quantidade, mooedaConversao,formaPagamentoEscolhida);
     }
 
     private static void selecionaFPagamento() {
