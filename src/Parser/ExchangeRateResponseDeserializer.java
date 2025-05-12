@@ -15,6 +15,9 @@ import java.util.Map;
  * Ele trata a presença ou ausência de campos no JSON e realiza o mapeamento manual dos atributos.
  * Além disso, converte o objeto {@code "conversion_rates"} em um {@code Map<String, Double>}.</p>
  *
+ * <p></> A vantagem na utilização desta classe é que, se houver mudanças nas chaves da API,
+ * basta alterar os object.get() correspondentes, sem a necessidade de modificar o corpo da classe ExchangeRateResponse. </p>
+ *
  * @author Igo Marcelino
  */
 public class ExchangeRateResponseDeserializer implements JsonDeserializer<ExchangeRateResponse> {
@@ -36,18 +39,18 @@ public class ExchangeRateResponseDeserializer implements JsonDeserializer<Exchan
 
         ExchangeRateResponse response = new ExchangeRateResponse();
 
-        // Define o resultado, se disponível
+
         response.setResult(object.has("result") ? object.get("result").getAsString() : null);
 
-        // Define a data da última atualização (em formato Unix), se disponível
+
         response.setTimeUltimaAtualizacao(object.has("time_last_update_unix")
                 ? object.get("time_last_update_unix").getAsLong()
                 : null);
 
-        // Define o código da moeda base, se disponível
+
         response.setMoedaBase(object.has("base_code") ? object.get("base_code").getAsString() : null);
 
-        // Desserializa o objeto de conversões, se presente
+
         JsonObject conversoes = object.getAsJsonObject("conversion_rates");
         if (!conversoes.isJsonNull()) {
             Map<String, Double> conversoesMap = jsonDeserializationContext.deserialize(conversoes, Map.class);
