@@ -24,7 +24,6 @@ public class ExchangeRateResponse {
     @SerializedName("result")
     private String result;
 
-    /** Timestamp da última atualização, em formato Unix epoch (segundos desde 1970-01-01T00:00:00Z). */
     @SerializedName("time_last_update_unix")
     private long timeUltimaAtualizacao;
 
