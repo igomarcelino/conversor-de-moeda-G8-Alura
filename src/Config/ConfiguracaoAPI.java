@@ -25,9 +25,16 @@ public class ConfiguracaoAPI {
      * @param apiKey A chave de autenticacao da API
      * @return retorna a url ja formatada com a chave da api  e a moeda de base para busca BRL
      * */
-    public static String configuraRequisicao(String apiKey){
+
+
+
+
+    public static   String configuraRequisicao(String apiKey){
         String requestURL = String.format("https://v6.exchangerate-api.com/v6/%s/latest/BRL",apiKey);
 
         return requestURL;
     }
+
+
+
 }

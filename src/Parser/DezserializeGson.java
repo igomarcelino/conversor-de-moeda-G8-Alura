@@ -31,9 +31,16 @@ public class DezserializeGson {
      * @return Um objeto {@link ExchangeRateResponse} preenchido com os dados do JSON.
      */
     public static ExchangeRateResponse parser(String jsonBody) {
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(ExchangeRateResponse.class, new ExchangeRateResponseDeserializer())
-                .create();
+
+           Gson gson = new GsonBuilder()
+                   .registerTypeAdapter(ExchangeRateResponse.class, new ExchangeRateResponseDeserializer())
+                   .create();
+
+
+        ExchangeRateResponse exchangeRateResponse = gson.fromJson(jsonBody, ExchangeRateResponse.class);
+        if (exchangeRateResponse.getResult().equalsIgnoreCase("error")){
+            throw new RuntimeException("erro na chave");
+        }
 
         return gson.fromJson(jsonBody, ExchangeRateResponse.class);
     }

@@ -36,13 +36,21 @@ public class RequisicaoHTTP {
      * @throws IOException Se ocorrer um erro de I/O ao enviar a requisição.
      * @throws InterruptedException Se a operação for interrompida durante a execução.
      */
-    public static String requestURl(String url) throws IOException, InterruptedException {
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder().
-                uri(URI.create(url)).
-                build();
+    public static String requestURl(String url)  {
+        HttpResponse<String> response;
+        try{
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder().
+                    uri(URI.create(url)).
+                    build();
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+           response  = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        } catch (IOException e) {
+            throw new RuntimeException("Chave invalida");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e.getMessage());
+        }
 
         return response.body();
     }
