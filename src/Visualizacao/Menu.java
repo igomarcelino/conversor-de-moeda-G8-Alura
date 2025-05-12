@@ -5,7 +5,8 @@ import Conexao.RequisicaoHTTP;
 import Config.ConfiguracaoAPI;
 import Enums.IOF;
 import Modelo.ExchangeRateResponse;
-import Modelo.Log;
+import Utilitarios.Log;
+import Utilitarios.LogLeitura;
 import Parser.DezserializeGson;
 
 import java.util.InputMismatchException;
@@ -198,7 +199,7 @@ public class Menu {
                         }
                         break;
                     case 2:
-                        System.out.println("Preparando os logs");
+                        LogLeitura.lerLog();
                         break;
                     case 3:
                         System.out.println("Saindo da aplicacao");
